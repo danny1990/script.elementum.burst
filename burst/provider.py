@@ -107,6 +107,10 @@ def process(provider, generator, filtering, has_special, verify_name=True, verif
 
         if extra == '-' and filtering.results:
             continue
+        
+        if 'remove_apostrophe' in definition and definition['remove_apostrophe'] == True:
+            query = query.replace("'", "")
+            log.debug("[%s] removing apostrophe from query" % provider)
 
         try:
             if 'charset' in definition and definition['charset'] and 'utf' not in definition['charset'].lower():
